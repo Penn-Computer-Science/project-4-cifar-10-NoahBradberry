@@ -32,16 +32,23 @@ y_test = tf.keras.utils.to_categorical(y_test, 10)
 
 batch_size = 64
 num_classes = 10
-epochs = 10
+epochs = 1
 
 #Build the Model
 model = tf.keras.models.Sequential([
-    tf.keras.layers.Conv2D(64, (5,5), activation='relu', input_shape=input_shape),
-    tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
-    tf.keras.layers.Conv2D(32, (5,5), activation='relu'),
-    tf.keras.layers.Conv2D(32, (3,3), activation='relu'),
+    tf.keras.layers.Conv2D(32, (3,3), activation='relu', input_shape=input_shape),
+    tf.keras.layers.BatchNormalization(),
+    tf.keras.layers.MaxPooling2D((2,2)),
+    tf.keras.layers.Dropout(0.25),
+
+    tf.keras.layers.Conv2D(64, (3,3), activation='relu', input_shape=input_shape),
+    tf.keras.layers.BatchNormalization(),
+    tf.keras.layers.MaxPooling2D((2,2)),
+    tf.keras.layers.Dropout(0.25),
+
     tf.keras.layers.Flatten(),
-    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.BatchNormalization(),
     tf.keras.layers.Dropout(0.5),
     tf.keras.layers.Dense(num_classes, activation='softmax')
 ])
