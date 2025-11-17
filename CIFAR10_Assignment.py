@@ -26,9 +26,6 @@ x_test = x_test.astype('float32') / 255.0
 y_train = tf.keras.utils.to_categorical(y_train, 10)
 y_test = tf.keras.utils.to_categorical(y_test, 10)
 
-#Show an example image from Mnist
-#plt.imshow(x_train[random.randint(0, 59999)][:,:,0], cmap= "gray")
-#plt.show()
 
 batch_size = 64
 num_classes = 10
